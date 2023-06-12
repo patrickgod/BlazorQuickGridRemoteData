@@ -26,7 +26,8 @@ namespace BlazorQuickGridRemoteData.Server.Data
                 new Product { Id = 7, Name = "Day of the Tentacle" },
                 new Product { Id = 8, Name = "Back to the Future" },
                 new Product { Id = 9, Name = "Toy Story" },
-                new Product { Id = 10, Name = "Brave New World" }
+                new Product { Id = 10, Name = "Brave New World" },
+                new Product { Id = 11, Name = "The Last of Us" }
                 );
         }
 

@@ -17,14 +17,15 @@ namespace BlazorQuickGridRemoteData.Server.Controllers
             _context = context;
         }
 
-        [HttpGet]
-        public async Task<ActionResult<List<Product>>> GetProducts()
+        [HttpGet("{skip}/{take}")]
+        public async Task<ActionResult<ProductResponse>> GetProducts(int skip, int take)
         {
             _context.Database.EnsureCreated();
             
-            var products = await _context.Products!.ToListAsync();
+            var count = await _context.Products.CountAsync();
+            var products = await _context.Products!.Skip(skip).Take(take).ToListAsync();
 
-            return Ok(products);
+            return Ok(new ProductResponse(products, count));
         }
     }
 }
