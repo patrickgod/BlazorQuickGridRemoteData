@@ -1,9 +1,18 @@
 ﻿@page "/"
+@inject HttpClient Http
+@using BlazorQuickGridRemoteData.Shared;
+@using Microsoft.AspNetCore.Components.QuickGrid;
 
-<PageTitle>Index</PageTitle>
+<QuickGrid Items="products.AsQueryable()">
+    <PropertyColumn Property="p => p.Name" />
+</QuickGrid>
 
-<h1>Hello, world!</h1>
+@code {
+    List<Product> products = new List<Product>();
 
-Welcome to your new app.
-
-<SurveyPrompt Title="How is Blazor working for you?" />
+    protected override async Task OnInitializedAsync()
+    {
+        var result = await Http.GetFromJsonAsync<List<Product>>("api/product");
+        products = result;
+    }
+}
