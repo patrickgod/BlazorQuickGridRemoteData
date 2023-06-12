@@ -3,12 +3,15 @@
 @using BlazorQuickGridRemoteData.Shared;
 @using Microsoft.AspNetCore.Components.QuickGrid;
 
-<QuickGrid Items="products.AsQueryable()">
+<QuickGrid Items="products.AsQueryable()" Pagination="@pagination">
     <PropertyColumn Property="p => p.Name" />
 </QuickGrid>
 
+<Paginator Value="@pagination" />
+
 @code {
     List<Product> products = new List<Product>();
+    PaginationState pagination = new PaginationState { ItemsPerPage = 5 };
 
     protected override async Task OnInitializedAsync()
     {
